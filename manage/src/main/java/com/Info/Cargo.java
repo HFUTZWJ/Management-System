@@ -4,6 +4,9 @@ public class Cargo {
     private Integer cargo_id;
     private String cargo_name;
 
+    public Cargo() {
+    }
+
     public Cargo(Integer cargo_id, String cargo_name) {
         this.cargo_id = cargo_id;
         this.cargo_name = cargo_name;

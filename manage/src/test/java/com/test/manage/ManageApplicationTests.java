@@ -1,7 +1,7 @@
 package com.test.manage;
 
 import com.Info.Cargo;
-import com.MapperR.Mapper;
+import com.Mapper.CargoMapper;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,11 +12,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 public class ManageApplicationTests {
 	@Autowired
-	private Mapper mapper;
+	private CargoMapper cargoMapper;
 	@Test
 	public void contextLoads() {
-		mapper.getCargoList();
-		Cargo cargo = mapper.getCargoById(1001);
+		cargoMapper.getCargoList();
+		Cargo cargo = cargoMapper.getCargoById(1001);
 		Assert.assertEquals("螺丝刀", cargo.getCargo_name());
 	}
 

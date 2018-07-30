@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="./js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript"></script>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <a onclick="requestData()">测试</a>
+    <table id="tab">
+        <tr>
+            <th>id</th>
+            <th>name</th>
+        </tr>
+    </table>
+</body>
+<script>
+    function requestData(){
+        $.ajax({
+            url: "/find",
+            type: "post",
+            dataType: "json",
+            success: function(data){
+                showData(data);
+            },
+            error: function(msg){
+                alert(msg);
+            }
+        });
+    };
+    //展示数据
+    function showData(data) {
+        var str = "";//定义用于拼接的字符串
+        for (var i = 0; i < data.length; i++) {
+            //拼接表格的行和列
+            str = "<tr><td>" + data[i].id + "</td><td>" + data[i].name + "</td></tr>";
+            //追加到table中
+            $("#tab").append(str);         }
+    }
+</script>
+</html>
