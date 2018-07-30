@@ -10,7 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -35,7 +38,7 @@ public class CargoController {
     }
 
     @RequestMapping(value = {"/addcargo"}, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE}, method = RequestMethod.GET)
-    public String add(HttpServletRequest request) {
+    public void add(HttpServletRequest request ,HttpServletResponse response) throws ServletException, IOException {
         String Id = request.getParameter("cargoId");
         String cargoName = request.getParameter("cargoName");
         Cargo newcargo = new Cargo();
@@ -43,7 +46,8 @@ public class CargoController {
         newcargo.setCargo_id(cargoId);
         newcargo.setCargo_name(cargoName);
         cargoService.addCargo(newcargo);
-        return "/success.html";
+        request.getRequestDispatcher("/success.html").forward(request, response);
+
     }
 
     @RequestMapping(value = {"/update"}, produces = {"application/json;charset=UTF-8"}, method = RequestMethod.GET)
