@@ -4,10 +4,12 @@ import com.Info.Cargo;
 import com.Service.CargoService;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.ServletException;
@@ -56,7 +58,9 @@ public class CargoController {
     }
 
     @RequestMapping(value = {"/delete"}, produces = {"application/json;charset=UTF-8"}, method = RequestMethod.GET)
-    public int delete() {
-        return cargoService.delete();
+    public void delete(@RequestParam("cargo_id") Integer cargo_id) {
+
+        cargoService.delete(cargo_id);
+
     }
 }

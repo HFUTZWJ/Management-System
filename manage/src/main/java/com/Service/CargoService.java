@@ -31,7 +31,7 @@ public class CargoService {
         return cargoMapper.update(1006,"hello");
     }
 
-    public int delete() {
-        return cargoMapper.delete(newcargo.getCargo_id());
+    public int delete(Integer cargo_id) {
+        return cargoMapper.delete(cargo_id);
     }
 }
