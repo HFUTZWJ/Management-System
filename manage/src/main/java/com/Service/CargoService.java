@@ -1,5 +1,5 @@
 package com.Service;
-//test
+
 import com.Info.Cargo;
 import com.Mapper.CargoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
