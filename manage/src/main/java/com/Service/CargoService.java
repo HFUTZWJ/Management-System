@@ -8,15 +8,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 @Service
 public class CargoService {
-    @Autowired
+    @Resource
     private CargoMapper cargoMapper;
-
-    private Cargo newcargo = new Cargo(1006, "HELLO");
-
 
     public List getAllCargo() {
         System.out.println(cargoMapper.getCargoList().toString());
@@ -27,8 +25,8 @@ public class CargoService {
         return cargoMapper.add(cargo);
     }
 
-    public int update() {
-        return cargoMapper.update(1006,"hello");
+    public int update(Integer id,String name) {
+        return cargoMapper.update(id,name);
     }
 
     public int delete(Integer cargo_id) {

@@ -53,8 +53,8 @@ public class CargoController {
     }
 
     @RequestMapping(value = {"/update"}, produces = {"application/json;charset=UTF-8"}, method = RequestMethod.GET)
-    public int update() {
-        return cargoService.update();
+    public int update(@RequestParam("cargo_id") Integer cargo_id,@RequestParam("cargo_name") String cargo_name) {
+        return cargoService.update(cargo_id,cargo_name);
     }
 
     @RequestMapping(value = {"/delete"}, produces = {"application/json;charset=UTF-8"}, method = RequestMethod.GET)

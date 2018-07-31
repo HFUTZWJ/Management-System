@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="./js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript"></script>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a onclick="requestData()">测试</a>
+<table id="tab">
+    <thead>
+    <tr>
+        <td>WId</td>
+        <td>WName</td>
+        <td>WLocation</td>
+    </tr>
+    </thead>
+    <tbody id='tbody1'>
+
+    </tbody>
+</table>
+<script>
+    function requestData(){
+        $.ajax({
+            url: "/findWare",
+            type: "get",
+            data:{},
+            dataType: "json",
+            success: function(data){
+                showData(data);
+            },
+            error: function(msg){
+                alert(msg);
+            }
+        });
+    };
+    //展示数据
+    function showData(data) {
+        for (var i = 0; i < data.length; i++) {
+            var tr = document.createElement('tr');
+            var tware_id = document.createElement('td');
+            var tware_name = document.createElement('td');
+            var tware_location = document.createElement('td');
+            var tware_del = document.createElement('td');
+            tware_id.innerHTML = data[i].ware_id;
+            tware_name.innerHTML = data[i].ware_name;
+            tware_location.innerHTML = data[i].ware_location;
+            tware_del.innerHTML = "删除";
+            tware_del.id = data[i].ware_id;
+            tware_del.setAttribute("onclick", "del()");
+            tr.appendChild(tware_id);
+            tr.appendChild(tware_name);
+            tr.appendChild(tware_location);
+            tr.appendChild(tware_del);
+            var tbody = document.getElementById('tbody1');
+            tbody.appendChild(tr);
+        }
+    }
+    function del() {
+        // 获取当前被点击的标签的id /spend 1.5h hhhhh
+        var ware_id = parseInt(window.event.srcElement.id);
+        var jsonob = {
+            "ware_id": ware_id
+        };
+        var url = "/deleteWare";
+        $.ajax({
+            url: url,
+            type: "get",
+            dataType: "json",
+            data: jsonob,
+            async: false,
+            success: function (data) {
+                var obj = jQuery.parseJSON(data);
+                alert("删除成功");
+                window.location.href = "./findWare.html";
+            },
+            error: function(msg) {
+                alert(msg);
+            }
+        });
+    }
+</script>
+</body>
+
+</html>
