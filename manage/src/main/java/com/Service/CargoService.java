@@ -1,7 +1,9 @@
 package com.Service;
 
 import com.Info.Cargo;
+import com.Info.Sku;
 import com.Mapper.CargoMapper;
+import com.Mapper.SkuMapper;
 import org.springframework.stereotype.Service;
 
 
@@ -16,10 +18,6 @@ public class CargoService {
     public List getAllCargo() {
         System.out.println(cargoMapper.getCargoList().toString());
         return cargoMapper.getCargoList();
-    }
-
-    public int addCargo(Cargo cargo) {
-        return cargoMapper.add(cargo);
     }
 
     public int update(Integer id,String name) {

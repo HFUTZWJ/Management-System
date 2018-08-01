@@ -9,6 +9,13 @@ public class Sku {
     public Sku() {
     }
 
+    public Sku(Integer sku_id, String sku_name, Integer ware_id, Integer cargo_id) {
+        this.sku_id = sku_id;
+        this.sku_name = sku_name;
+        this.ware_id = ware_id;
+        this.cargo_id = cargo_id;
+    }
+
     public Integer getSku_id() {
         return sku_id;
     }
@@ -41,10 +48,13 @@ public class Sku {
         this.cargo_id = cargo_id;
     }
 
-    public Sku(Integer sku_id, String sku_name, Integer ware_id, Integer cargo_id) {
-        this.sku_id = sku_id;
-        this.sku_name = sku_name;
-        this.ware_id = ware_id;
-        this.cargo_id = cargo_id;
+    @Override
+    public String toString() {
+        return "Sku{" +
+                "sku_id=" + sku_id +
+                ", sku_name='" + sku_name + '\'' +
+                ", ware_id=" + ware_id +
+                ", cargo_id=" + cargo_id +
+                '}';
     }
 }

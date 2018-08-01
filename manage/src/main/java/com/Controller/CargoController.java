@@ -39,18 +39,6 @@ public class CargoController {
         return json.toString();
     }
 
-    @RequestMapping(value = {"/addcargo"}, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE}, method = RequestMethod.GET)
-    public void add(HttpServletRequest request ,HttpServletResponse response) throws ServletException, IOException {
-        String Id = request.getParameter("cargoId");
-        String cargoName = request.getParameter("cargoName");
-        Cargo newcargo = new Cargo();
-        int cargoId = Integer.valueOf(Id).intValue();
-        newcargo.setCargo_id(cargoId);
-        newcargo.setCargo_name(cargoName);
-        cargoService.addCargo(newcargo);
-        request.getRequestDispatcher("/success.html").forward(request, response);
-
-    }
 
     @RequestMapping(value = {"/update"}, produces = {"application/json;charset=UTF-8"}, method = RequestMethod.GET)
     public int update(@RequestParam("cargo_id") Integer cargo_id,@RequestParam("cargo_name") String cargo_name) {
@@ -59,8 +47,6 @@ public class CargoController {
 
     @RequestMapping(value = {"/delete"}, produces = {"application/json;charset=UTF-8"}, method = RequestMethod.GET)
     public void delete(@RequestParam("cargo_id") Integer cargo_id) {
-
         cargoService.delete(cargo_id);
-
     }
 }

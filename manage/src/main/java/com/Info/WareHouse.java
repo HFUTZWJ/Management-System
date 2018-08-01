@@ -5,6 +5,9 @@ public class WareHouse {
     private String ware_name;
     private String ware_location;
 
+    public WareHouse() {
+    }
+
     public WareHouse(Integer ware_id, String ware_name, String ware_location) {
         this.ware_id = ware_id;
         this.ware_name = ware_name;

@@ -21,8 +21,17 @@ public class SkuService {
         return skuMapper.getSkuListByCargoType(cargo_id);
     }
 
-    public int skuAdd(Sku sku) {
-        return skuMapper.skuAdd(sku);
+    public List<Sku> getAllSku(){
+        return skuMapper.getAllSku();
+    }
+    public int skuAdd(String cargoName,int cargoID,int wareID,int skuID) {
+        Sku newsku = new Sku();
+        newsku.setSku_name(cargoName);
+        newsku.setCargo_id(cargoID);
+        newsku.setSku_id(skuID);
+        newsku.setWare_id(wareID);
+        System.out.println(newsku.toString());
+        return skuMapper.skuAdd(newsku);
     }
 
     public int skuUpdate(Integer ware_id,String sku_name,Integer cargo_id,Integer sku_id) {
