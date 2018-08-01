@@ -7,12 +7,18 @@
     <title>Title</title>
 </head>
 <body>
-    <a onclick="requestData()">测试</a>
+<span id="cargolist">货物类型：
+
+</span>
+<input type="button" name="inquiresku" value = "查询" onclick="inquire()">
+
     <table id="tab">
     <thead>
     <tr>
+        <td>SId</td>
+        <td>SName</td>
         <td>CId</td>
-        <td>CName</td>
+        <td>WId</td>
     </tr>
     </thead>
     <tbody id='tbody1'>
@@ -20,66 +26,76 @@
     </tbody>
     </table>
     <script>
-        function requestData(){
-            $.ajax({
+        $.ajax(
+            {
                 url: "/find",
-                type: "post",
+                type:"post",
                 dataType: "json",
                 success: function(data){
-                    showData(data);
+                    fillData(data);
                 },
-                error: function(msg){
+                error: function (msg) {
                     alert(msg);
                 }
-            });
-        };
-        //展示数据
-        function showData(data) {
-            var str = "";//定义用于拼接的字符串
+            }
+        );
+        //动态生成下拉框
+        var rad = document.getElementById("cargolist");
+        function fillData(data) {
+            var fillrad = document.createElement('select');
+            fillrad.setAttribute("id","cargoname");
+            //生成选项
             for (var i = 0; i < data.length; i++) {
-                //拼接表格的行和列
-                //str = "<tr><td>" + data[i].id + "</td><td>" + data[i].name + "</td></tr>";
-                //追加到table中
-                //$("#tab").append(str);
+                var _option = document.createElement("option");
+                _option.value = data[i].id;
+                _option.text = data[i].name;
+                fillrad.appendChild(_option);
+            }
+            rad.appendChild(fillrad);
+        }
+        function inquire() {
+            var obj = document.getElementById("cargoname");//所选中的下拉框选项
+            var index = obj.selectedIndex; // 选中索引
+            var cargo_id = obj.options[index].value;//取值
+            var jsonob = {
+                "cargo_id": cargo_id//向后台传入货物类型进行查询
+            };
+            $.ajax(
+                {
+                    url:"/getsku",
+                    type: "get",
+                    dataType: "json",
+                    data: jsonob,
+                    async: false,
+                    success: function (data) {
+                        showData(data);
+                    },
+                    error: function(msg) {
+                        alert(msg);
+                    }
+                }
+            )
+        }
+        function showData(data) {
+            for (var i = 0; i < data.length; i++) {
                 var tr = document.createElement('tr');
+                var tsku_id = document.createElement('td');
+                var tsku_name = document.createElement('td');
                 var tcargo_id = document.createElement('td');
-                var tcargo_name = document.createElement('td');
-                var tcargo_del = document.createElement('td');
-                tcargo_id.innerHTML = data[i].id;
-                tcargo_name.innerHTML = data[i].name;
-                tcargo_del.innerHTML = "删除";
-                tcargo_del.id = data[i].id;
-                tcargo_del.setAttribute("onclick", "del()");
+                var tware_id = document.createElement('td');
+                tsku_id.innerHTML = data[i].sku_id;
+                tsku_name.innerHTML = data[i].sku_name;
+                tcargo_id.innerHTML = data[i].cargo_id;
+                tware_id.innerHTML = data[i].ware_id;
+                tr.appendChild(tsku_id);
+                tr.appendChild(tsku_name);
                 tr.appendChild(tcargo_id);
-                tr.appendChild(tcargo_name);
-                tr.appendChild(tcargo_del);
+                tr.appendChild(tware_id);
                 var tbody = document.getElementById('tbody1');
                 tbody.appendChild(tr);
             }
         }
-        function del() {
-            // 获取当前被点击的标签的id /spend 1.5h hhhhh
-            var cargo_id = parseInt(window.event.srcElement.id);
-            var jsonob = {
-                "cargo_id": cargo_id
-            };
-            var url = "/delete";
-            $.ajax({
-                url: url,
-                type: "get",
-                dataType: "json",
-                data: jsonob,
-                async: false,
-                success: function (data) {
-                    var obj = jQuery.parseJSON(data);
-                    alert("删除成功");
-                    window.location.href = "./allcargo.html";
-                },
-                error: function(msg) {
-                    alert(msg);
-                }
-            });
-        }
+
     </script>
 </body>
 

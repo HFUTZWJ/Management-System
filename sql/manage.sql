@@ -19,4 +19,4 @@ create table cargo
 );
 insert into cargo VALUES(1001,'食品'),(1002,'衣物'),(1003,'汽车'),(1004,'家电'),(1005,'家具')
 insert into warehouse values(01,'一号仓库','合肥'),(02,'二号仓库','南京'),(03,'三号仓库','杭州');
-insert into sku values(1,'饼干',01,1001),(2,'衬衣',02,1002),(3,'外套',02,1003);
+insert into sku values(1,'饼干',01,1001),(2,'衬衣',02,1002),(3,'外套',03,1002);

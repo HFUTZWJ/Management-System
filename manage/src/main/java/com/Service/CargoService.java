@@ -2,11 +2,8 @@ package com.Service;
 
 import com.Info.Cargo;
 import com.Mapper.CargoMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+
 
 import javax.annotation.Resource;
 import java.util.List;
