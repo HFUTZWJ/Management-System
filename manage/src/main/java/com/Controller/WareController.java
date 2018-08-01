@@ -35,6 +35,17 @@ public class WareController {
         return json.toString();
     }
 
+    @RequestMapping(value = {"/findWareById"}, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+    public String getWareById(@RequestParam("ware_id") Integer ware_id) {
+        WareHouse ware = wareService.getWareById(ware_id);
+        System.out.println(ware);
+        JSONObject jo = new JSONObject();
+        jo.put("ware_id",ware.getWare_id());
+        jo.put("ware_name",ware.getWare_name());
+        jo.put("ware_location",ware.getWare_location());
+        System.out.println(jo);
+        return jo.toString();
+    }
     @RequestMapping(value = {"/addWare"}, produces = {"application/json;charset=UTF-8"}, method = RequestMethod.GET)
     public void add(HttpServletRequest request , HttpServletResponse response) {
         String Id = request.getParameter("wareId");
@@ -49,8 +60,11 @@ public class WareController {
     }
 
     @RequestMapping(value = {"/updateWare"}, produces = {"application/json;charset=UTF-8"}, method = RequestMethod.GET)
-    public int update(@RequestParam("ware_id") Integer ware_id,@RequestParam("ware_name") String ware_name,@RequestParam("ware_lacation") String ware_location) {
-        return wareService.updateWare(ware_id,ware_name,ware_location);
+    public void update(@RequestParam("ware_id") Integer ware_id,@RequestParam("ware_name") String ware_name,@RequestParam("ware_location") String ware_location) {
+        System.out.println("ware_id" + ware_id);
+        System.out.println("ware_name" + ware_name);
+        System.out.println("ware_location" + ware_location);
+        wareService.updateWare(ware_id,ware_name,ware_location);
     }
 
     @RequestMapping(value = {"/deleteWare"}, produces = {"application/json;charset=UTF-8"}, method = RequestMethod.GET)

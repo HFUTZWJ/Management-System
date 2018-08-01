@@ -93,6 +93,8 @@
             tware_location.innerHTML = data[i].ware_location;
             tware_edit.innerHTML = "修改";
             tware_edit.className='am-btn am-btn-default am-btn-xs am-text-secondary am-icon-pencil-square-o';
+            tware_edit.id = data[i].ware_id;
+            tware_edit.setAttribute("onclick","edi()");
             tware_del.innerHTML = "删除";
             tware_del.className="am-btn am-btn-default am-btn-xs am-text-danger am-icon-trash-o";
             tware_del.id = data[i].ware_id;
@@ -106,6 +108,13 @@
             tbody.appendChild(tr);
         }
     }
+    function edi() {
+        var ware_id = parseInt(window.event.srcElement.id);
+        //通过H5中Web Storage中的localStorage对象页面间传值
+        localStorage.setItem("ware_id",ware_id);
+        window.open("editWare.html","_blank");
+    }
+    //js动态删除仓库
     function del() {
         // 获取当前被点击的标签的id /spend 1.5h hhhhh
         var ware_id = parseInt(window.event.srcElement.id);

@@ -140,18 +140,20 @@
                 var tsku_name = document.createElement('td');
                 var tcargo_id = document.createElement('td');
                 var tware_id = document.createElement('td');
-                var tware_del = document.createElement('button');
+                var tsku_del = document.createElement('button');
                 tsku_id.innerHTML = data[i].sku_id;
                 tsku_name.innerHTML = data[i].sku_name;
                 tcargo_id.innerHTML = data[i].cargo_id;
                 tware_id.innerHTML = data[i].ware_id;
-                tware_del.innerHTML = "删除";
-                tware_del.className="am-btn am-btn-default am-btn-xs am-text-danger am-icon-trash-o";
+                tsku_del.innerHTML = "删除";
+                tsku_del.className="am-btn am-btn-default am-btn-xs am-text-danger am-icon-trash-o";
+                tsku_del.id = data[i].sku_id;
+                tsku_del.setAttribute("onclick", "del()");
                 tr.appendChild(tsku_id);
                 tr.appendChild(tsku_name);
                 tr.appendChild(tcargo_id);
                 tr.appendChild(tware_id);
-                tr.appendChild(tware_del);
+                tr.appendChild(tsku_del);
                 var tbody = document.getElementById('tbody1');
                 tbody.appendChild(tr);
             }
@@ -164,21 +166,45 @@
                 var tsku_name = document.createElement('td');
                 var tcargo_id = document.createElement('td');
                 var tware_id = document.createElement('td');
-                var tware_del = document.createElement('button');
+                var tsku_del = document.createElement('button');
                 tsku_id.innerHTML = data[i].sku_id;
                 tsku_name.innerHTML = data[i].sku_name;
                 tcargo_id.innerHTML = data[i].cargo_id;
                 tware_id.innerHTML = data[i].ware_id;
-                tware_del.innerHTML = "删除";
-                tware_del.className="am-btn am-btn-default am-btn-xs am-text-danger am-icon-trash-o";
+                tsku_del.innerHTML = "删除";
+                tsku_del.className="am-btn am-btn-default am-btn-xs am-text-danger am-icon-trash-o";
+                tsku_del.id = data[i].sku_id;
+                tsku_del.setAttribute("onclick", "del()");
                 tr.appendChild(tsku_id);
                 tr.appendChild(tsku_name);
                 tr.appendChild(tcargo_id);
                 tr.appendChild(tware_id);
-                tr.appendChild(tware_del);
+                tr.appendChild(tsku_del);
                 var tbody = document.getElementById('tbody1');
                 tbody.appendChild(tr);
             }
+        }
+        function del() {
+            var sku_id = parseInt(window.event.srcElement.id);
+            var jsonob1 = {
+                "sku_id": sku_id
+            };
+            var url = "/deleteSku";
+            $.ajax({
+                url: url,
+                type: "get",
+                dataType: "json",
+                data: jsonob1,
+                async: false,
+                success: function (data) {
+                    var obj = jQuery.parseJSON(data);
+                    alert("删除成功");
+                    window.location.href = "./allCargo.html";
+                },
+                error: function(msg) {
+                    alert(msg);
+                }
+            });
         }
     </script>
 </body>

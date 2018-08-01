@@ -30,7 +30,7 @@ public class SkuController {
           JSONArray json = new JSONArray();
           for(Sku s : skuList){
               JSONObject jo = new JSONObject();
-              jo.put("sku_id",s.getCargo_id());
+              jo.put("sku_id",s.getSku_id());
               jo.put("sku_name",s.getSku_name());
               jo.put("cargo_id",s.getCargo_id());
               jo.put("ware_id",s.getWare_id());
@@ -46,7 +46,7 @@ public class SkuController {
         JSONArray json = new JSONArray();
         for(Sku s : skuList){
             JSONObject jo = new JSONObject();
-            jo.put("sku_id",s.getCargo_id());
+            jo.put("sku_id",s.getSku_id());
             jo.put("sku_name",s.getSku_name());
             jo.put("cargo_id",s.getCargo_id());
             jo.put("ware_id",s.getWare_id());

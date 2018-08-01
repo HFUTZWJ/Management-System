@@ -11,7 +11,9 @@ import java.util.List;
 public class WareService {
     @Resource
     private WareMapper wareMapper;
-
+    public WareHouse getWareById(Integer ware_id){
+        return wareMapper.getWareById(ware_id);
+    }
     public List getAllWare() {
         return wareMapper.getWareList();
         //return "hello";

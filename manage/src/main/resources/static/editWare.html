@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="./js/jquery-1.8.3.min.js"></script>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body onload="requestData()">
+ware_id:<input type="text" id = "ware_id">
+ware_name:<input type="text" id = "ware_name">
+ware_location:<input type = "text" id = "ware_location">
+<input type="button" value="确认修改" onclick="edit()">
+<script>
+    //获得需要修改的仓库ID，通过传回仓库ID，获得相应仓库数据
+    var ware_id = localStorage.getItem("ware_id");
+    var jsonob = {
+        "ware_id": ware_id
+    };
+    function requestData(){
+        $.ajax({
+            url: "/findWareById",
+            type: "get",
+            data: jsonob,
+            dataType: "json",
+            success: function(data){
+                showData(data);
+            },
+            error: function(msg){
+                alert(msg);
+            }
+        });
+    };
+
+    function showData(data) {
+        var wareid = document.getElementById("ware_id");
+        wareid.value = data.ware_id;
+        var warename = document.getElementById("ware_name");
+        warename.value = data.ware_name;
+        var warelocation = document.getElementById("ware_location");
+        warelocation.value = data.ware_location;
+    }
+    //获取修改后元素并传回后台
+    function edit() {
+        var ware_id = document.getElementById("ware_id").value;
+        var ware_name = document.getElementById("ware_name").value;
+        var ware_location = document.getElementById("ware_location").value;
+        var jsonob1 = {
+            "ware_id": ware_id,
+            "ware_name": ware_name,
+            "ware_location": ware_location
+        };
+        var url = "/updateWare";
+        $.ajax({
+            url: url,
+            type: "get",
+            dataType: "json",
+            data: jsonob1,
+            async: false,
+            success: function (data) {
+                var obj = jQuery.parseJSON(data);
+                alert("修改成功");
+                window.location.href = "findWare.html";
+            },
+            error: function(msg) {
+                alert(msg);
+            }
+        });
+    }
+</script>
+</body>
+</html>
