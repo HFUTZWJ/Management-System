@@ -69,4 +69,9 @@ public class SkuController {
         skuService.skuAdd(cargoName,cargoId,wareId,skuId);
         request.getRequestDispatcher("/allcargo.html").forward(request, response);
     }
+    @RequestMapping(value = {"/deleteSku"}, produces = {"application/json;charset=UTF-8"}, method = RequestMethod.GET)
+    public void delete(@RequestParam("sku_id") Integer sku_id) {
+        skuService.skuDelete(sku_id);
+    }
+
 }
