@@ -2,14 +2,85 @@
 <html lang="en">
 <head>
     <script src="./js/jquery-1.8.3.min.js"></script>
+    <link rel="icon" type="image/png" href="i/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="i/app-icon72x72@2x.png">
+    <link rel="stylesheet" href="css/amazeui.min.css"/>
+    <link rel="stylesheet" href="css/admin.css">
+    <script src="js/amazeui.min.js"></script>
+    <script src="js/app.js"></script>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body onload="requestData()">
-ware_id:<input type="text" id = "ware_id">
-ware_name:<input type="text" id = "ware_name">
-ware_location:<input type = "text" id = "ware_location">
-<input type="button" value="确认修改" onclick="edit()">
+<header class="am-topbar admin-header">
+    <div class="am-topbar-brand">
+        <strong>货物管理系统</strong>
+    </div>
+
+    <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
+
+    <div class="am-collapse am-topbar-collapse" id="topbar-collapse">
+    </div>
+</header>
+<div class="am-cf admin-main">
+    <!-- sidebar start -->
+    <div class="admin-sidebar">
+        <ul class="am-list admin-sidebar-list">
+            <li class="admin-parent">
+                <a href="allcargo.html" class="am-cf" data-am-collapse="{target: '#collapse-nav'}"><span class="am-icon-file"></span> 货物信息 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
+                <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav">
+                    <li><a href="addCargo.html" class="am-cf"><span class="am-icon-check"></span> 新增货物<span class="am-icon-star am-fr am-margin-right admin-icon-yellow"></span></a></li>
+                </ul>
+            </li>
+            <li><a href="findWare.html"><span class="am-icon-table"></span> 仓库信息</a></li>
+        </ul>
+    </div>
+    <!-- sidebar end -->
+    <!-- content start -->
+    <div class="admin-content">
+        <div class="am-cf am-padding">
+            <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">进货</strong> / <small>form</small></div>
+        </div>
+        <div class="am-tabs am-margin" data-am-tabs>
+            <ul class="am-tabs-nav am-nav am-nav-tabs">
+                <li><a href="#tab2">修改信息</a></li>
+            </ul>
+
+            <div class="am-tabs-bd">
+                <div class="am-tab-panel am-fade" id="tab2">
+                    <form class="am-form">
+                        <div class="am-g am-margin-top">
+                            <div class="am-u-sm-2 am-text-right">
+                                仓库ID
+                            </div>
+                            <div class="am-u-sm-4"style="margin-right: 50%">
+                                <input type="text" class="am-input-sm" id = "ware_id">
+                            </div>
+                        </div>
+                        <div class="am-g am-margin-top">
+                            <div class="am-u-sm-2 am-text-right">
+                                仓库名
+                            </div>
+                            <div class="am-u-sm-4" style="margin-right: 50%">
+                                <input type="text" class="am-input-sm" id = "ware_name">
+                            </div>
+                        </div>
+                        <div class="am-g am-margin-top">
+                            <div class="am-u-sm-2 am-text-right">
+                                仓库地址
+                            </div>
+                            <div class="am-u-sm-4" style="margin-right: 50%">
+                                <input type="text" class="am-input-sm" id = "ware_location">
+                            </div>
+                        </div>
+                        <input type="button" class="am-btn am-btn-primary am-btn-xs" value="确认修改" onclick="edit()">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     //获得需要修改的仓库ID，通过传回仓库ID，获得相应仓库数据
     var ware_id = localStorage.getItem("ware_id");
